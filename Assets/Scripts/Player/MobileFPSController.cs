@@ -7,6 +7,8 @@ public class MobileFPSController : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterController characterController;
 
+    [SerializeField] private CameraBobbing cameraBobbing;
+
     [Header("Input Actions")]
  
     [SerializeField] private InputAction moveAction;
@@ -19,6 +21,11 @@ public class MobileFPSController : MonoBehaviour
 
     private float cameraPitch;
     private Vector3 playerVelocity;
+
+    void Start()
+    {
+        cameraBobbing = GetComponent<CameraBobbing>();  
+    }
 
     private void OnEnable()
     {
@@ -44,6 +51,11 @@ public class MobileFPSController : MonoBehaviour
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * moveSpeed * Time.deltaTime);
+
+        if (cameraBobbing != null)
+        {
+        cameraBobbing.isWalking = input.magnitude > 0.1f;
+        }
     }
 
     private void HandleLook()
