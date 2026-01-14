@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions_Mobile",
     "maps": [
         {
@@ -93,7 +94,7 @@
                     "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
+                    "processors": "NormalizeVector2,StickDeadzone",
                     "groups": ";Gamepad",
                     "action": "Move",
                     "isComposite": false,
@@ -225,7 +226,7 @@
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "groups": ";Gamepad",
                     "action": "Look",
                     "isComposite": false,
