@@ -374,7 +374,7 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 60e5dce3-8513-4829-90c5-a5a868c3ec7c
-    m_Processors: 
+    m_Processors: StickDeadzone(min=0.2)
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
@@ -391,7 +391,7 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 00a0289d-eea8-4a1d-a340-cc63874fecfb
-    m_Processors: 
+    m_Processors: StickDeadzone(min=0.2)
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 

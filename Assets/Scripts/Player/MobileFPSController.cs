@@ -43,7 +43,7 @@ public class MobileFPSController : MonoBehaviour
     {
         HandleMovement();
         HandleLook();
-        ApplyGravity();
+         ApplyGravity(); 
     }
 
     private void HandleMovement()
@@ -75,4 +75,5 @@ public class MobileFPSController : MonoBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
     }
+    
 }
