@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2062570929607187395
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301253069512066410, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5964299365685271300, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_Name
+      value: MobileControls Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5964299365685271300, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103606707495535651, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126190175996684750, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9143258252336643842, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6421360394324961659}
+    - targetCorrespondingSourceObject: {fileID: 6852591437739584262, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8413407123151523388}
+    - targetCorrespondingSourceObject: {fileID: 8103606707495535651, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3273088469970643132}
+  m_SourcePrefab: {fileID: 100100000, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+--- !u!1 &4865843414971805893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6852591437739584262, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+  m_PrefabInstance: {fileID: 2062570929607187395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8413407123151523388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865843414971805893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenStick
+  m_MovementRange: 50
+  m_DynamicOriginRange: 100
+  m_ControlPath: <Gamepad>/rightStick
+  m_Behaviour: 0
+  m_UseIsolatedInputActions: 0
+  m_PointerDownAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c7af5da8-870e-4112-a615-45ff853be1bf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_PointerMoveAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3915ba75-15bc-4263-a3e1-29d4989568ef
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!1 &7096786509531423937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9143258252336643842, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+  m_PrefabInstance: {fileID: 2062570929607187395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6421360394324961659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096786509531423937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenStick
+  m_MovementRange: 50
+  m_DynamicOriginRange: 100
+  m_ControlPath: <Gamepad>/leftStick
+  m_Behaviour: 0
+  m_UseIsolatedInputActions: 0
+  m_PointerDownAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 08dc969c-4caf-4e70-a284-08d938c41423
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_PointerMoveAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a8bbb481-2634-49be-9648-b39efe643be2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!1 &7848210681495429088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8103606707495535651, guid: 9e20551ec64c7e44b9c9f1b5570cb284, type: 3}
+  m_PrefabInstance: {fileID: 2062570929607187395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3273088469970643132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7848210681495429088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenButton
+  m_ControlPath: <Keyboard>/space
