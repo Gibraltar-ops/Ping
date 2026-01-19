@@ -46,11 +46,11 @@ Material:
     - _Cull: 0
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _Fade: 1
+    - _Fade: 0.5
     - _Intersection_Thickness: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 2
+    - _Range: 0.08
     - _Range2: 0.5
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
