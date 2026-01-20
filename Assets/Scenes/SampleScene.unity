@@ -12514,17 +12514,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3857218177784624084, guid: 222cb652f40eb5c46bb42c9f185af0db, type: 3}
   m_PrefabInstance: {fileID: 1851619936}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &678220125 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1659208662794071231, guid: 981194dcaf3db7e49b9afac58890cdac, type: 3}
-  m_PrefabInstance: {fileID: 8347689978329132483}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &684852228
 GameObject:
   m_ObjectHideFlags: 0
@@ -12606,7 +12595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonarDetection
   minIntensity: 0
-  visibilityDuration: 2
+  visibilityDuration: 5
   maxTimeHold: 0.5
 --- !u!65 &766696986
 BoxCollider:
@@ -12718,7 +12707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonarDetection
   minIntensity: 0
-  visibilityDuration: 2
+  visibilityDuration: 5
   maxTimeHold: 0.5
 --- !u!135 &782986064
 SphereCollider:
@@ -37912,15 +37901,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3527862035312891441, guid: 69354f9b03dc1744b9a19a08be01c259, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71.16
+      value: 70.52
       objectReference: {fileID: 0}
     - target: {fileID: 3527862035312891441, guid: 69354f9b03dc1744b9a19a08be01c259, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.87
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 3527862035312891441, guid: 69354f9b03dc1744b9a19a08be01c259, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.05
+      value: -23.76
       objectReference: {fileID: 0}
     - target: {fileID: 3527862035312891441, guid: 69354f9b03dc1744b9a19a08be01c259, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38011,10 +38000,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4421167649704375350, guid: c0a9ece73823bcb4dbd524e1ab539b8f, type: 3}
-      propertyPath: chargeIndicatorUI
-      value: 
-      objectReference: {fileID: 678220125}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

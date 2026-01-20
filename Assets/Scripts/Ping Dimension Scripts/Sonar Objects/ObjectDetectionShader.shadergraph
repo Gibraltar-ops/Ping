@@ -550,12 +550,12 @@
     },
     "m_Color": {
         "color": {
-            "r": 1.0,
-            "g": 0.0,
-            "b": 0.0,
+            "r": 0.20266719162464143,
+            "g": 1.6830188035964966,
+            "b": 0.9919081330299377,
             "a": 1.0
         },
-        "mode": 0
+        "mode": 1
     }
 }
 
@@ -1036,7 +1036,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,

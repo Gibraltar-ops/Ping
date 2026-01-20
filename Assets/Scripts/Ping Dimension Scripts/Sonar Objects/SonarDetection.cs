@@ -8,7 +8,7 @@ public class SonarDetection : MonoBehaviour
 
     [Header("Fade settings")]
     public float visibilityDuration = 5.0f;
-    public float maxTimeHold = 0.5f;
+    public float maxTimeHold = 1f;
 
     private float timer = 0f;
     private ScannerController lastHitSonar; 

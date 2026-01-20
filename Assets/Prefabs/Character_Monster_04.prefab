@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71.16
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.87
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.05
+      value: 9.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7601974325636892768, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d831064934e87eb41ab32537e14eda51, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ad1c1cb446d3fc47ae6d2180da77363, type: 2}
     - target: {fileID: 919132149155446097, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       propertyPath: m_Name
       value: Character_Monster_04
@@ -65,10 +65,19 @@ PrefabInstance:
       addedObject: {fileID: 1979272259777295030}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8721062099239819287}
+      addedObject: {fileID: 5493973471732358670}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3273776037543860296}
     - targetCorrespondingSourceObject: {fileID: 3587665837729623989, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2790235907430237894}
+    - targetCorrespondingSourceObject: {fileID: 3587665837729623989, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6603031327061799018}
+    - targetCorrespondingSourceObject: {fileID: 3587665837729623989, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3004233790761897297}
   m_SourcePrefab: {fileID: 100100000, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
 --- !u!1 &483628690014051951 stripped
 GameObject:
@@ -90,6 +99,42 @@ MonoBehaviour:
   minIntensity: 0
   visibilityDuration: 5
   maxTimeHold: 0.5
+--- !u!114 &6603031327061799018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483628690014051951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483045f9d6752cc4499aefa3756b9325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostEffect
+  ghostMaterial: {fileID: 2100000, guid: 5ad1c1cb446d3fc47ae6d2180da77363, type: 2}
+  fadeSpeed: 0.29
+  sonarDisableDelay: 5
+--- !u!135 &3004233790761897297
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483628690014051951}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.92
+  m_Center: {x: -0.0024435886, y: 2.7905126, z: 0.46521124}
 --- !u!1 &4305066829956058251 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f776dc5c90547c24bb4a4f9562cf970c, type: 3}
@@ -117,7 +162,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8721062099239819287
+--- !u!114 &5493973471732358670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,3 +176,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IdleChanger
   minWaitTime: 3
   maxWaitTime: 7
+--- !u!114 &3273776037543860296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305066829956058251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483045f9d6752cc4499aefa3756b9325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostEffect
+  ghostMaterial: {fileID: 2100000, guid: 5ad1c1cb446d3fc47ae6d2180da77363, type: 2}
+  fadeSpeed: 2
+  sonarDisableDelay: 5

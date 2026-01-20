@@ -59,4 +59,14 @@ public class ScannerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+{
+    GhostEffect ghost = other.GetComponent<GhostEffect>();
+   
+    if (ghost != null)
+    {
+        ghost.CreateGhostSnapshot();
+    }
+}
 }
