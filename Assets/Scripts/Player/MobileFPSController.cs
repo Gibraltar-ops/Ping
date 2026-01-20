@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem; 
 
-public class MobileFPSController : MonoBehaviour 
+public class MobileFPSController : MonoBehaviour
 {
+    public bool IsWalking { get; private set; }
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterController characterController;
@@ -49,12 +50,13 @@ public class MobileFPSController : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 input = moveAction.ReadValue<Vector2>();
+        IsWalking = input.magnitude > 0.1f;
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * moveSpeed * Time.deltaTime);
 
         if (cameraBobbing != null)
         {
-        cameraBobbing.isWalking = input.magnitude > 0.1f;
+        cameraBobbing.isWalking = IsWalking;
         }
     }
 
