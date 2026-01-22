@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8277876078591588265}
   - component: {fileID: 4633551681428434221}
   - component: {fileID: 4421167649704375350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -154,10 +154,16 @@ MonoBehaviour:
   walkableLayer:
     serializedVersion: 2
     m_Bits: 8
+  sonarSound: {fileID: 8300000, guid: c34b220c4bfef4944a924eb65cf1aed0, type: 3}
+  minPitch: 0.6
+  maxPitch: 1.3
+  minVolume: 0.5
+  maxVolume: 1
   chargeIndicatorUI: {fileID: 0}
   maxChargeTime: 3
   minStrength: 0.5
   maxStrength: 3
+  cooldownDuration: 1
 --- !u!1 &3522828806196684979
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,10 +180,8 @@ GameObject:
   - component: {fileID: 4032560523796569672}
   - component: {fileID: 3770849603175767841}
   - component: {fileID: 7056096167247368630}
-  - component: {fileID: 8505870650434981671}
-  - component: {fileID: 7144492185412629497}
   - component: {fileID: 4558144437666938772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,36 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonarScript
   sonarPrefab: {fileID: 1288983237441378153, guid: 6d0c9c8afdf75af4db925a25fd403b7c, type: 3}
---- !u!114 &8505870650434981671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3522828806196684979}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0849576d48880f348ab54afe69c2f55e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioDetection
-  sampleWindow: 64
---- !u!114 &7144492185412629497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3522828806196684979}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21328b48c9e86f4dac5ed9d3e80cbc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScaleFromMicrophone
-  detector: {fileID: 8505870650434981671}
-  sonarPrefab: {fileID: 1288983237441378153, guid: 6d0c9c8afdf75af4db925a25fd403b7c, type: 3}
-  loudnessSensibility: 10
-  threshold: 0.2
-  cooldown: 0.08
+  sonarSound: {fileID: 8300000, guid: c34b220c4bfef4944a924eb65cf1aed0, type: 3}
 --- !u!114 &4558144437666938772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4536432750520380069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,7 +23,8 @@ public class CameraBobbing : MonoBehaviour
 
     private void Update()
     {
-        if (!isWalking) walkingTime = 0;
+        if (!isWalking)walkingTime = 0;
+        
         else walkingTime += Time.deltaTime;
 
         //Camera target pos calculation

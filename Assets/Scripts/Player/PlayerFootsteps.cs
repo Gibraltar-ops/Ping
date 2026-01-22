@@ -16,16 +16,17 @@ public class PlayerFootsteps : MonoBehaviour
     {
         while (true)
         {
-            if (movement.IsWalking)
+            if (movement != null && movement.IsWalking)
             {
                 if (footStepSFX.Length > 0)
                 {
-
                     AudioClip randomClip = footStepSFX[Random.Range(0, footStepSFX.Length)];
-                    AudioManager.instance.PlaySFX(randomClip);
+
+                    AudioManager.instance.PlaySFXOnTransform(randomClip, transform, 0.5f, Random.Range(0.9f, 1.1f));
                 }
             }
             yield return new WaitForSeconds(0.6f);
         }
+    
     }
 }

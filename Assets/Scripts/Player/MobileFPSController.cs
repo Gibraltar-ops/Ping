@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class MobileFPSController : MonoBehaviour
 {
@@ -11,7 +11,6 @@ public class MobileFPSController : MonoBehaviour
     [SerializeField] private CameraBobbing cameraBobbing;
 
     [Header("Input Actions")]
- 
     [SerializeField] private InputAction moveAction;
     [SerializeField] private InputAction lookAction;
 
@@ -25,7 +24,7 @@ public class MobileFPSController : MonoBehaviour
 
     void Start()
     {
-        cameraBobbing = GetComponent<CameraBobbing>();  
+        cameraBobbing = GetComponent<CameraBobbing>();
     }
 
     private void OnEnable()
@@ -44,7 +43,7 @@ public class MobileFPSController : MonoBehaviour
     {
         HandleMovement();
         HandleLook();
-         ApplyGravity(); 
+        ApplyGravity();
     }
 
     private void HandleMovement()
@@ -56,7 +55,7 @@ public class MobileFPSController : MonoBehaviour
 
         if (cameraBobbing != null)
         {
-        cameraBobbing.isWalking = IsWalking;
+            cameraBobbing.isWalking = IsWalking;
         }
     }
 
@@ -72,10 +71,9 @@ public class MobileFPSController : MonoBehaviour
     {
         if (characterController.isGrounded && playerVelocity.y < 0)
         {
-            playerVelocity.y = -2f; 
+            playerVelocity.y = -2f;
         }
         playerVelocity.y += gravity * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
     }
-    
 }
