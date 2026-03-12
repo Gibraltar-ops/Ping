@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class RaycastSonarCharger : MonoBehaviour
 {
-
-
     public GameObject sonarPrefab;
+
+    
     public LayerMask walkableLayer;
 
     [Header("Audio Settings")]
@@ -48,6 +48,8 @@ public class RaycastSonarCharger : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.IsPaused) return;
+        
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;

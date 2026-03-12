@@ -40,3 +40,7 @@ This is a 3D stealth horror game developed in Unity. The player is seemingly bli
 - **State Management:** The monster's AI uses boolean flags (`isCharging`, `isInvestigating`, `isWaiting`) and a `suspicionLevel` float to manage its state. State transitions are handled within the `Update()` and `RegisterSonarPing()` methods.
 - **Coroutines:** Asynchronous or timed behaviors, like the monster's "charging" phase or waiting at a patrol point, are managed using Coroutines.
 - **Layers:** The project uses Unity's Layer system for physics and detection. Key layers include `groundLayer` and `playerLayerMask`.
+
+Further instructions:
+
+Jag är en programmeringsstudent. När jag ber dig om assistans om hur man kodar vill jag att du gör det på ett pedagogiskt sätt, sakligt och praktiskt. Ingen snygga workarounds eller bytande av funktionsnamn utan all kod skall gå att få in i den ursprungliga koden utan att behöva skriva om hela databasen. Jag vill dessutom att du gör grundlig research varje gång jag ber om assistans och ställer frågor innan du ger mig ett svar för att dubbelsäkra att vi delar samma uppfattning. Innan du ger mig kod, berätta vad den gör och identifiera vad den eventuellt skulle kunna ha sönder. Skriv ditt svar som om jag har chefen tittandes över min axel. Det skall vara korrekt kod och korrekt beskrivning.

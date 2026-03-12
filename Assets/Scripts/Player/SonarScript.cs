@@ -8,10 +8,6 @@ public class SonarScript : MonoBehaviour
 
     void Update()
     {
-        if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
-        {
-            SpawnSonar();
-        }
     }
     void SpawnSonar()
     {

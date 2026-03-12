@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+
+    public AudioMixerGroup sfxMixerGroup;
+    public AudioMixerGroup ambienceMixerGroup;
 
     private void Awake()
     {
@@ -50,6 +54,7 @@ public class AudioManager : MonoBehaviour
         source.minDistance = 1f;
         source.maxDistance = 25f;
         source.rolloffMode = AudioRolloffMode.Linear;
+        source.outputAudioMixerGroup = sfxMixerGroup;
         return source;
     }
 

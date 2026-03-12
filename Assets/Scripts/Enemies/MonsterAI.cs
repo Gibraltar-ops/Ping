@@ -2,18 +2,25 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using NUnit.Framework;
 
+public enum MonsterState { Idle, Patrolling, Investigating, Chasing }
 public class MonsterAI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private MonsterAnimationManager animManager;
+
     private ChaserAudioManager audioManager;
+    private ScreenshakeScript screenShake;
+    private PlayerStatus playerStatus;
     private Animator anim;
+
     [Header("UI")]
     [SerializeField] private Image suspicionBar;
+
+    [Header("State Management")]
+    [SerializeField] private MonsterState currentState = MonsterState.Patrolling;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -29,30 +36,22 @@ public class MonsterAI : MonoBehaviour
     private bool isWaiting;
 
     [Header("Detection")]
+
+    public bool isAwake = false;
     [SerializeField] private float runSpeed = 7f;
     [SerializeField] private float investigateSpeed = 4.5f;
     [SerializeField] private float suspicionLevel = 0f;
     [SerializeField] private float suspicionDecay = 0.5f;
     [SerializeField] private float detectionThreshold = 3.5f;
-
-    [SerializeField] private float investigateThreshold = 1.5f; 
-[SerializeField] private float sonarReactionChance = 0.6f;
+    [SerializeField] private float vicinityThreshold = 5f;
+    [SerializeField] private float vicinityDetectionRate = 0.5f;
+    [SerializeField] private float investigateThreshold = 1.5f;
+    [SerializeField] private float sonarReactionChance = 0.6f;
     [SerializeField] private float maxSonarDistance = 100f;
-
-    [Header("State Flags")]
-    public bool isCharging;
-    private bool isInvestigating;
+    [SerializeField] private float sonarSuspicionStrength = 1.5f;
 
     private bool hasCaughtPlayer = false;
-
-/*     [Header("Chase settings")]
-    [SerializeField] private float runSpeed = 6.5f;
-    [SerializeField] private float visionRange = 5f;
-    [SerializeField] private float engagementRange = 2f; */
-
-    private bool isPlayerVisible;
-    private bool isPlayerInRange;
-    private bool wasPlayerVisibleLastFrame;
+    public bool isCharging => currentState == MonsterState.Chasing;
 
     private void Awake()
     {
@@ -61,196 +60,234 @@ public class MonsterAI : MonoBehaviour
         if (navAgent == null) navAgent = GetComponent<NavMeshAgent>();
         if (animManager == null) animManager = GetComponent<MonsterAnimationManager>();
         audioManager = GetComponent<ChaserAudioManager>();
+        screenShake = GetComponent<ScreenshakeScript>();
 
-        if (suspicionBar != null)
-        {
-            suspicionBar.fillAmount = 0;
-        }
+        if (playerTransform != null)
+            playerStatus = playerTransform.GetComponent<PlayerStatus>();
+
+        if (suspicionBar != null) suspicionBar.fillAmount = 0;
     }
 
     private void Update()
     {
-        if (!isCharging && suspicionLevel > 0)
-        {
-            suspicionLevel -= suspicionDecay * Time.deltaTime;
-            suspicionLevel = Mathf.Max(0, suspicionLevel);
-        }
+        if (hasCaughtPlayer || playerTransform == null) return;
+        HandleSuspicion();
         UpdateBehaviourState();
         UpdateAnimationParameters();
-
         UpdateSuspicionUI();
     }
 
-    private void UpdateSuspicionUI()
+    private void HandleSuspicion()
     {
-        if (suspicionBar != null)
+        if (currentState != MonsterState.Chasing)
         {
-            suspicionBar.fillAmount = suspicionLevel / detectionThreshold;
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            bool playerInVicinity = distanceToPlayer <= vicinityThreshold;
+
+            if (isAwake && playerInVicinity && (playerStatus == null || !playerStatus.isHidden))
+            {
+                suspicionLevel += vicinityDetectionRate * Time.deltaTime;
+            }
+            else if (suspicionLevel > 0)
+            {
+                suspicionLevel -= suspicionDecay * Time.deltaTime;
+            }
+
+            suspicionLevel = Mathf.Clamp(suspicionLevel, 0, detectionThreshold);
+
+            if (suspicionLevel >= detectionThreshold)
+            {
+                TransitionToState(MonsterState.Chasing);
+            }
         }
     }
 
-   public void RegisterSonarPing(Vector3 sonarPosition, float strength)
+    private void UpdateBehaviourState()
+    {
+        switch (currentState)
+        {
+            case MonsterState.Patrolling:
+                navAgent.speed = walkSpeed;
+                PerformPatrol();
+                break;
+
+            case MonsterState.Investigating:
+                navAgent.speed = investigateSpeed;
+                PerformInvestigation();
+                break;
+
+            case MonsterState.Chasing:
+                break;
+        }
+    }
+
+private void TransitionToState(MonsterState newState)
 {
-        if (isCharging || hasCaughtPlayer) return;
-    
+    if (currentState == newState) return;
+
+    StopAllCoroutines();
+    isWaiting = false;
+    navAgent.isStopped = false;
+
+    currentState = newState;
+
+    if (newState == MonsterState.Chasing)
+    {
+        StartCoroutine(StartCharging());
+    }
+}
+
+    public void RegisterSonarPing(Vector3 sonarPosition, float strength)
+{
+    if (!isAwake || hasCaughtPlayer) return;
+    if (playerStatus != null && playerStatus.isHidden) return;
+
+    if (currentState == MonsterState.Chasing)
+    {
+        navAgent.SetDestination(sonarPosition);
+        return;
+    }
+
     float distanceToPing = Vector3.Distance(transform.position, sonarPosition);
-        if (distanceToPing > maxSonarDistance) return;
-    
-    float effectiveStrength = strength * (1 - (distanceToPing / maxSonarDistance));
+    if (distanceToPing > maxSonarDistance) return;
+
+    float effectiveStrength = sonarSuspicionStrength * (1 - (distanceToPing / maxSonarDistance));
     suspicionLevel += effectiveStrength;
+
     if (suspicionLevel >= detectionThreshold)
     {
-        StopAllCoroutines();
-        StartCoroutine(StartCharging());
+        TransitionToState(MonsterState.Chasing);
     }
     else if (suspicionLevel >= investigateThreshold)
     {
-        if (Random.value < sonarReactionChance)
-        {
-            InvestigatePosition(sonarPosition);
-        }
+      
+            currentPatrolPoint = sonarPosition;
+            hasPatrolPoint = true;
+            TransitionToState(MonsterState.Investigating);
     }
 }
-
-    private void InvestigatePosition(Vector3 pos)
-    {
-        isInvestigating = true;
-        isWaiting = false;
-        navAgent.isStopped = false;
-        navAgent.speed = investigateSpeed;
-        navAgent.SetDestination(pos);
-        hasPatrolPoint = true;
-        currentPatrolPoint = pos;
-    }
-    private IEnumerator StartCharging()
-    {
-        isCharging = true;
-        suspicionLevel = detectionThreshold;
-
-        navAgent.isStopped = true;
-        animManager.TriggerDetection();
-        audioManager.PlayDetectionSound();
-        yield return new WaitForSeconds(1.5f);
-        navAgent.isStopped = false;
-        navAgent.speed = runSpeed;
-        navAgent.SetDestination(playerTransform.position);
-
-        float chaseTimer = 5f;
-        while (chaseTimer > 0)
-        {
-            navAgent.SetDestination(playerTransform.position);
-            chaseTimer -= Time.deltaTime;
-            if (Vector3.Distance(transform.position, playerTransform.position) < 1.5f)
-        {
-                hasCaughtPlayer = true;
-                navAgent.isStopped = true;
-
-                GameManager.Instance.EndGame();
-
-                yield break;
-            }
-
-            yield return null;
-        }
-
-        isCharging = false;
-        suspicionLevel = 0;
-        navAgent.speed = walkSpeed;
-    }
-   private void UpdateBehaviourState()
-    {
-        if (isCharging)
-        {
-            return;
-        }
-
-        if (isInvestigating)
-        {
-            navAgent.speed = investigateSpeed;
-            if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
-            {
-                if (!isWaiting)
-                {
-                    isWaiting = true;
-                    waitTimer = 5f;
-                }
-            }
-        }
-        else
-        {
-            navAgent.speed = walkSpeed;
-            PerformPatrol();
-        }
+    
+    private void PerformPatrol()
+{
         if (isWaiting)
         {
             waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0)
-            {
-                isWaiting = false;
-                hasPatrolPoint = false;
-                if (isInvestigating)
-                {
-                    isInvestigating = false;
-                }
-            }
+            if (waitTimer <= 0) isWaiting = false;
+            return;
         }
-    }
 
-    private void UpdateAnimationParameters()
-    {
-  bool moving = navAgent.velocity.magnitude > 0.1f;
-        anim.SetBool("IsMoving", moving);
-        anim.SetBool("IsRunning", isCharging);
-    }
+        if (!hasPatrolPoint) FindPatrolPoint();
 
-    private void FindPatrolPoint()
-    {
-        float randomX = Random.Range(-patrolRadius, patrolRadius);
-        float randomZ = Random.Range(-patrolRadius, patrolRadius);
-        Vector3 potentialPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        navAgent.SetDestination(currentPatrolPoint);
 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(potentialPoint, out hit, 2f, NavMesh.AllAreas))
+        if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
-            currentPatrolPoint = hit.position;
-            hasPatrolPoint = true;
+            isWaiting = true;
+            waitTimer = waitTimeAtPoint;
+            hasPatrolPoint = false;
         }
+}
+
+private void PerformInvestigation()
+{
+    if (HandleWaitTime())
+    {
+        if (!isWaiting) TransitionToState(MonsterState.Patrolling);
+        return;
     }
 
-    private void PerformPatrol()
+    navAgent.SetDestination(currentPatrolPoint);
+
+    if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
     {
-        if (isWaiting) return;
-
-        if (!hasPatrolPoint)
-        {
-            FindPatrolPoint();
-        }
-
-        if (hasPatrolPoint)
-        {
-            navAgent.SetDestination(currentPatrolPoint);
-            if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
-            {
-                isWaiting = true;
-                waitTimer = waitTimeAtPoint;
-            }
-        }
-    }
-
-    private void PerformChase()
-    {
-        if (playerTransform != null)
-        {
-            navAgent.SetDestination(playerTransform.position);
-        }
-    }
-
-    IEnumerator StopForDetection(float duration)
-    {
-        navAgent.isStopped = true;
-        navAgent.velocity = Vector3.zero;
-        anim.SetBool("IsMoving", false);
-        yield return new WaitForSeconds(duration);
-        navAgent.isStopped = false;
+        isWaiting = true;
+        waitTimer= 5f;
     }
 }
+
+private bool HandleWaitTime()
+{
+    if (isWaiting)
+    {
+        waitTimer -= Time.deltaTime;
+        if (waitTimer <= 0)
+        {
+            isWaiting = false;
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+private IEnumerator StartCharging()
+{
+    suspicionLevel = detectionThreshold;
+
+    if (SettingsManager.Instance != null)
+        SettingsManager.Instance.TriggerHapticFeedback();
+
+    navAgent.isStopped = true;
+    animManager.TriggerDetection();
+    audioManager.PlayDetectionSound();
+    yield return new WaitForSeconds(2f);
+
+    navAgent.isStopped = false;
+    navAgent.speed = runSpeed;
+
+    float chaseTimer = 5f;
+    while (chaseTimer > 0)
+    {
+        chaseTimer -= Time.deltaTime;
+        navAgent.SetDestination(playerTransform.position);
+
+        if (Vector3.Distance(transform.position, playerTransform.position) < 1.5f)
+        {
+            CatchPlayer();
+            yield break;
+        }
+        
+        suspicionLevel = Mathf.Lerp(suspicionLevel, 0f, Time.deltaTime * 0.5f);
+
+        
+        yield return null;
+    }
+
+    suspicionLevel = detectionThreshold - 1.5f;
+    TransitionToState(MonsterState.Patrolling);
+}
+
+private void CatchPlayer()
+{
+    hasCaughtPlayer = true;
+    navAgent.isStopped = true;
+    if (screenShake != null) screenShake.TriggerShake(1f);
+    GameManager.Instance.TriggerJumpscare(JumpscareType.Chaser, playerTransform.position);
+}
+
+private void FindPatrolPoint()
+{
+    Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
+    randomDirection += transform.position;
+    NavMeshHit hit;
+    if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, NavMesh.AllAreas))
+    {
+        currentPatrolPoint = hit.position;
+        hasPatrolPoint = true;
+    }
+}
+    
+    private void UpdateAnimationParameters()
+{
+    bool moving = navAgent.velocity.magnitude > 0.1f;
+    anim.SetBool("IsMoving", moving);
+    anim.SetBool("IsRunning", currentState == MonsterState.Chasing);
+}
+    
+    private void UpdateSuspicionUI()
+    {
+        if (suspicionBar != null)
+            suspicionBar.fillAmount = suspicionLevel / detectionThreshold;
+    }
+}
+

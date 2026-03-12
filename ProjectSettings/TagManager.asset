@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Sonar
+  - Player1
+  - CinemachineTarget
+  - Fire
+  - GameOverUI
+  - AngelJumpscare
+  - ChaserJumpscare
+  - JumpscareAudio
+  - GameWinUI
+  - GamePauseUI
+  - LessScaryJumpscareAudio
   layers:
   - Default
   - TransparentFX
@@ -13,7 +23,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 

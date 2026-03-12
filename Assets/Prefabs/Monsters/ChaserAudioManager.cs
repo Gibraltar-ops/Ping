@@ -18,6 +18,16 @@ public class ChaserAudioManager : MonoBehaviour
     [SerializeField] private float walkStepInterval = 0.6f;
     [SerializeField] private float runStepInterval = 0.3f;
 
+    [Header("Footstep Screenshake Settings")]
+    [SerializeField] private Unity.Cinemachine.CinemachineImpulseSource impulseFootstepsSource;
+    [SerializeField] private float walkShakeIntensity = 0.05f;
+    [SerializeField] private float runShakeIntensity = 0.4f;
+
+    [Header("Detection Screenshake settings")]
+
+[SerializeField] private Unity.Cinemachine.CinemachineImpulseSource impulseDetectionSource;
+    [SerializeField] private float detectionShakeIntensity = 1.0f;
+
     [Header("Ambient Sound Settings")]
     [Tooltip("Random sounds played when idle.")]
     [SerializeField] private AudioClip[] ambientSounds;
@@ -29,12 +39,8 @@ public class ChaserAudioManager : MonoBehaviour
     [Tooltip("Sounds played randomly while charging at the player.")]
     [SerializeField] private AudioClip[] chargingSounds;
     [SerializeField] private Vector2 chargingSoundIntervalRange = new Vector2(1f, 3f);
-
-    // Component references
     private MonsterAnimationManager animManager;
     private MonsterAI monsterAI;
-
-    // State tracking
     private Coroutine footstepCoroutine;
     private Coroutine ambientSoundCoroutine;
     private Coroutine chargingSoundCoroutine;
@@ -47,7 +53,6 @@ public class ChaserAudioManager : MonoBehaviour
 
     void Start()
     {
-        // Start playing ambient sounds initially
         ambientSoundCoroutine = StartCoroutine(PlayRandomSounds(ambientSource, ambientSounds, ambientSoundIntervalRange));
     }
 
@@ -108,12 +113,21 @@ public class ChaserAudioManager : MonoBehaviour
         float interval = isRunning ? runStepInterval : walkStepInterval;
         AudioClip[] clips = isRunning ? runningFootsteps : walkingFootsteps;
 
+        float intensity = isRunning ? runShakeIntensity : walkShakeIntensity;
+
         while (true)
         {
             if (clips.Length > 0)
             {
                 AudioClip clip = clips[Random.Range(0, clips.Length)];
                 footstepSource.PlayOneShot(clip);
+
+                if (impulseFootstepsSource != null)
+                {
+                    impulseFootstepsSource.GenerateImpulseWithVelocity(Vector3.down * intensity);
+                }
+                
+            
             }
             yield return new WaitForSeconds(interval);
         }
@@ -136,9 +150,16 @@ public class ChaserAudioManager : MonoBehaviour
 
     public void PlayDetectionSound()
     {
+      
+
         if (detectionSound != null && voiceSource.enabled)
         {
             voiceSource.PlayOneShot(detectionSound);
         }
+
+        if (impulseDetectionSource != null)
+                {
+                    impulseDetectionSource.GenerateImpulse();
+                }
     }
 }
